@@ -1,6 +1,6 @@
 
 let cartHTML = '';
-cart.forEach(function(value) {
+cart.forEach(function(value, index) {
 
   const productId = value.productId
   let matchingProduct;
@@ -11,7 +11,7 @@ cart.forEach(function(value) {
     }
 
   });
-  console.log(matchingProduct)
+  console.log(matchingProduct);
 
     cartHTML = cartHTML + `<div class="cart-item-container">
             <div class="delivery-date">
@@ -31,12 +31,12 @@ cart.forEach(function(value) {
                 </div>
                 <div class="product-quantity">
                   <span>
-                    Quantity: <span class="quantity-label">${cart.quantity}</span>
+                    Quantity: <span class="quantity-label">${value.quantity}</span>
                   </span>
                   <span class="update-quantity-link link-primary">
                     Update
                   </span>
-                  <span class="delete-quantity-link link-primary">
+                  <span class="delete-quantity-link link-primary js-delete-link" data-index = "${index}">
                     Delete
                   </span>
                 </div>
@@ -89,6 +89,17 @@ cart.forEach(function(value) {
             </div>
           </div>`
 });
-console.log(cartHTML)
+console.log(cartHTML);
 document.querySelector('.js-order-summary').innerHTML = cartHTML;
+
+const deleteElement = document.querySelectorAll('.js-delete-link')
+
+deleteElement.forEach(function(remove) {
+  
+  remove.addEventListener('click', function() {
+    const deleteItem = remove.dataset.index
+    cart.splice(deleteItem, 1)
+    location.reload();
+  });
+});
 
