@@ -1,14 +1,15 @@
 renderCart()
-deliveryOptions.forEach(function(exact_date) {
-    const days = dayjs()
-    const date = days.add(exact_date.date, 'days')
-    const dateFormat = date.format('dddd, MMMM D')
-  });
+
 
 function renderCart() {
   
     let cartHTML = '';
     cart.forEach(function(value, index) {
+      deliveryOptions.forEach(function(exact_date) {
+        const days = dayjs()
+        const date = days.add(exact_date.date, 'days')
+        const dateFormat = date.format('dddd, MMMM D')
+      });
 
       const productId = value.productId
       let matchingProduct;
