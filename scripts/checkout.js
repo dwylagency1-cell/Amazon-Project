@@ -1,4 +1,9 @@
 renderCart()
+hello()
+const day = dayjs();
+const display = day.add(7, 'day')
+console.log(display.format('dddd, MMMM D' ));
+
 function renderCart() {
     let cartHTML = '';
     cart.forEach(function(value, index) {
