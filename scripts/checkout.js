@@ -1,10 +1,12 @@
 renderCart()
-hello()
-const day = dayjs();
-const display = day.add(7, 'day')
-console.log(display.format('dddd, MMMM D' ));
+deliveryOptions.forEach(function(exact_date) {
+    const days = dayjs()
+    const date = days.add(exact_date.date, 'days')
+    const dateFormat = date.format('dddd, MMMM D')
+  });
 
 function renderCart() {
+  
     let cartHTML = '';
     cart.forEach(function(value, index) {
 
@@ -58,7 +60,7 @@ function renderCart() {
                         name="delivery-option-${matchingProduct.id}">
                       <div>
                         <div class="delivery-option-date">
-                          Tuesday, June 21
+                          ${dateFormat}
                         </div>
                         <div class="delivery-option-price">
                           FREE Shipping
