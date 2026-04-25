@@ -23,6 +23,14 @@ function renderCart() {
         const date = days.add(exact_date.date, 'days')
         const dateFormat = date.format('dddd, MMMM D')
 
+        let priceText;
+        if (exact_date.priceCents === 0) {
+          priceText = 'Free Shipping';
+        }
+        else{
+          priceText = `${exact_date.priceCents / 100} shipping`
+        }
+
         deliveryOptionsHTML = deliveryOptionsHTML + `
                     <div class="delivery-option">
                       <input type="radio" checked
@@ -33,7 +41,7 @@ function renderCart() {
                           ${dateFormat}
                         </div>
                         <div class="delivery-option-price">
-                          ${exact_date.priceCents / 100}
+                          ${priceText}
                         </div>
                       </div>
                     </div>`
@@ -74,45 +82,7 @@ function renderCart() {
                     <div class="delivery-options-title">
                       Choose a delivery option:
                     </div>
-                    <div class="delivery-option">
-                      <input type="radio" checked
-                        class="delivery-option-input"
-                        name="delivery-option-${matchingProduct.id}">
-                      <div>
-                        <div class="delivery-option-date">
-                          May 10 
-                        </div>
-                        <div class="delivery-option-price">
-                          FREE Shipping
-                        </div>
-                      </div>
-                    </div>
-                    <div class="delivery-option">
-                      <input type="radio"
-                        class="delivery-option-input"
-                        name="delivery-option-${matchingProduct.id}">
-                      <div>
-                        <div class="delivery-option-date">
-                          Wednesday, June 15
-                        </div>
-                        <div class="delivery-option-price">
-                          $4.99 - Shipping
-                        </div>
-                      </div>
-                    </div>
-                    <div class="delivery-option">
-                      <input type="radio"
-                        class="delivery-option-input"
-                        name="delivery-option-${matchingProduct.id}">
-                      <div>
-                        <div class="delivery-option-date">
-                          Monday, June 13
-                        </div>
-                        <div class="delivery-option-price">
-                          $9.99 - Shipping
-                        </div>
-                      </div>
-                    </div>
+                    ${deliveryOptionsHTML}
                   </div>
                 </div>
               </div>`
