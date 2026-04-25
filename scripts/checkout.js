@@ -5,11 +5,7 @@ function renderCart() {
   
     let cartHTML = '';
     cart.forEach(function(value, index) {
-      deliveryOptions.forEach(function(exact_date) {
-        const days = dayjs()
-        const date = days.add(exact_date.date, 'days')
-        const dateFormat = date.format('dddd, MMMM D')
-      });
+      
 
       const productId = value.productId
       let matchingProduct;
@@ -21,6 +17,29 @@ function renderCart() {
 
       });
       console.log(matchingProduct);
+      let deliveryOptionsHTML = '';
+      deliveryOptions.forEach(function(exact_date) {
+        const days = dayjs()
+        const date = days.add(exact_date.date, 'days')
+        const dateFormat = date.format('dddd, MMMM D')
+
+        deliveryOptionsHTML = deliveryOptionsHTML + `
+                    <div class="delivery-option">
+                      <input type="radio" checked
+                        class="delivery-option-input"
+                        name="delivery-option-${matchingProduct.id}">
+                      <div>
+                        <div class="delivery-option-date">
+                          ${dateFormat}
+                        </div>
+                        <div class="delivery-option-price">
+                          ${exact_date.priceCents / 100}
+                        </div>
+                      </div>
+                    </div>`
+      });
+
+
 
         cartHTML = cartHTML + `<div class="cart-item-container">
                 <div class="delivery-date">
@@ -61,7 +80,7 @@ function renderCart() {
                         name="delivery-option-${matchingProduct.id}">
                       <div>
                         <div class="delivery-option-date">
-                          ${dateFormat}
+                          May 10 
                         </div>
                         <div class="delivery-option-price">
                           FREE Shipping
