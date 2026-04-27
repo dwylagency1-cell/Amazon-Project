@@ -1,12 +1,11 @@
 renderCart()
 
-
 function renderCart() {
   
     let cartHTML = '';
     cart.forEach(function(value, index) {
       
-
+      let deliveryOptionsHTML = '';
       const productId = value.productId
       let matchingProduct;
       products.forEach(function(product) {
@@ -17,7 +16,7 @@ function renderCart() {
 
       });
       console.log(matchingProduct);
-      let deliveryOptionsHTML = '';
+      
       deliveryOptions.forEach(function(exact_date) {
         const days = dayjs()
         const date = days.add(exact_date.date, 'days')
@@ -29,11 +28,19 @@ function renderCart() {
         }
         else{
           priceText = `${exact_date.priceCents / 100} shipping`
-        }
+        };
 
+        let check;
+
+          if (String(value.deliveryOptionId) === String(exact_date.id)) {
+            check = 'checked';
+          }
+          else{
+            check = '';
+          }
         deliveryOptionsHTML = deliveryOptionsHTML + `
                     <div class="delivery-option">
-                      <input type="radio" checked
+                      <input type="radio" ${check}
                         class="delivery-option-input"
                         name="delivery-option-${matchingProduct.id}">
                       <div>
@@ -45,13 +52,26 @@ function renderCart() {
                         </div>
                       </div>
                     </div>`
+        
       });
+
+      let matchingDate;
+          deliveryOptions.forEach(function(exact_date) {
+            if(value.deliveryOptionId === exact_date.id) {
+              matchingDate = exact_date
+            }
+            const exactday = dayjs()
+            const exactdate = exactday.add(matchingDate.date , 'days')
+            const exactformat = exactdate.format('dddd, MMMM D')
+
+          });
+
 
 
 
         cartHTML = cartHTML + `<div class="cart-item-container">
                 <div class="delivery-date">
-                  Delivery date: Tuesday, June 21
+                  Delivery date: ${exactformat}
                 </div>
 
                 <div class="cart-item-details-grid">
@@ -103,5 +123,7 @@ function renderCart() {
         
       });
     });
+    
 }
+
 
