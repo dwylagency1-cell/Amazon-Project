@@ -60,11 +60,11 @@ function renderCart() {
             if(value.deliveryOptionId === exact_date.id) {
               matchingDate = exact_date
             }
-            const exactday = dayjs()
-            const exactdate = exactday.add(matchingDate.date , 'days')
-            const exactformat = exactdate.format('dddd, MMMM D')
 
           });
+          const exactday = dayjs()
+          const exactdate = exactday.add(matchingDate.date , 'days')
+          const exactformat = exactdate.format('dddd, MMMM D')
 
 
 
