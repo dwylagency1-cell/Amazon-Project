@@ -40,8 +40,9 @@ function renderCart() {
           }
         deliveryOptionsHTML = deliveryOptionsHTML + `
                     <div class="delivery-option">
-                      <input type="radio" ${check}
-                        class="delivery-option-input"
+                      <input type="radio" ${check} 
+                        class="delivery-option-input js-delivery-option" data-delivery-option-id = "${exact_date.id}"
+                        data-index = "${index}"
                         name="delivery-option-${matchingProduct.id}">
                       <div>
                         <div class="delivery-option-date">
@@ -52,8 +53,17 @@ function renderCart() {
                         </div>
                       </div>
                     </div>`
+         
         
       });
+      document.querySelectorAll('.js-delivery-option').forEach(function(element) {
+          element.addEventListener('click', function() {
+            const radio = element.dataset.deliveryOptionId
+            // -- continue from here 
+
+          })
+
+        });
 
       let matchingDate;
           deliveryOptions.forEach(function(exact_date) {
@@ -124,6 +134,7 @@ function renderCart() {
       });
     });
     
-}
+};
+
 
 
