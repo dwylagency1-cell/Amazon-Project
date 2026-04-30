@@ -59,9 +59,15 @@ function renderCart() {
       document.querySelectorAll('.js-delivery-option').forEach(function(element) {
           element.addEventListener('click', function() {
             const radio = element.dataset.deliveryOptionId
-            // -- continue from here 
+            const index = element.dataset.index
+            cart[index].deliveryOptionId = deliveryOptionId;
+            localStorage.setItem('cart', JSON.stringify(cart))
+            renderCart();
 
-          })
+            
+            
+
+          });
 
         });
 
